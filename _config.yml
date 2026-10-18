@@ -1,0 +1,15 @@
+title: tinchetanche
+url: "https://tinchetanche.org"
+baseurl: ""
+markdown: kramdown
+permalink: /scritti/:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md

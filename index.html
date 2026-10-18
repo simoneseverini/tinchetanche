@@ -1,26 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: null
+---
+<!doctype html>
+<html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tinchetanche</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      max-width: 680px;
-      margin: 80px auto;
-      padding: 0 20px;
-      line-height: 1.6;
-      color: #111;
-    }
-    h1 { font-size: 2.2rem; margin-bottom: 0.2rem; }
-    p.tagline { color: #666; margin-top: 0; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Storie, articoli di opinione e idee. In italiano e, a volte, in inglese.">
+  <meta name="color-scheme" content="light">
+  <title>tinchetanche — Noi si scrive. E si pensa.</title>
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 </head>
 <body>
-  <h1>tinchetanche</h1>
-  <p class="tagline">Notes, essays, and stories.</p>
-  <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-  <p>Welcome to the blog. Coming soon.</p>
+  <a class="skip-link" href="#scritti">Vai agli scritti</a>
+  <main class="page">
+    <header class="masthead">
+      <h1>Noi si scrive. E si pensa. A volte tutt'e due. Ma non sempre.</h1>
+    </header>
+
+    <section id="scritti" aria-label="Storie, opinioni e idee" class="feed">
+      {% assign articoli = site.posts | sort: 'date' | reverse %}
+      {% for post in articoli %}
+        <article class="entry" lang="{{ post.lang | default: 'it' }}" id="articolo-{{ post.slug }}">
+          <div class="meta">
+            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%d.%m.%Y' }}</time>
+            {% if post.categoria %}<span class="meta-separator" aria-hidden="true">·</span><span>{{ post.categoria | escape }}</span>{% endif %}
+            {% if post.lang == 'en' %}<span class="meta-separator" aria-hidden="true">·</span><span>EN</span>{% endif %}
+          </div>
+          <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+          <div class="entry-content">{{ post.content }}</div>
+          <p class="permalink"><a href="{{ post.url | relative_url }}" aria-label="Link diretto a {{ post.title | escape }}">Link a questo testo ↗</a></p>
+        </article>
+      {% endfor %}
+
+      {% if articoli.size == 0 %}
+        <p class="empty">Per ora, la pagina è bianca. Non durerà.</p>
+      {% endif %}
+    </section>
+
+    <div id="load-trigger" class="load-trigger" aria-hidden="true"></div>
+    <footer class="footer"><span>Fine, per ora.</span></footer>
+  </main>
+
+  <script>
+    // Gli articoli sono ordinati per data da GitHub Pages.
+    // Ne mostriamo quattro alla volta, poi altri quattro scorrendo.
+    (function () {
+      const articles = [...document.querySelectorAll('.entry')];
+      const trigger = document.getElementById('load-trigger');
+      const batchSize = 4;
+      let visible = Math.min(batchSize, articles.length);
+
+      if (!('IntersectionObserver' in window) || articles.length <= batchSize) {
+        trigger.hidden = true;
+        return;
+      }
+
+      articles.forEach((article, index) => {
+        if (index >= visible) article.hidden = true;
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        const next = Math.min(visible + batchSize, articles.length);
+        for (let i = visible; i < next; i++) articles[i].hidden = false;
+        visible = next;
+        if (visible === articles.length) {
+          observer.disconnect();
+          trigger.hidden = true;
+        }
+      }, { rootMargin: '600px 0px' });
+
+      observer.observe(trigger);
+    })();
+  </script>
 </body>
 </html>
