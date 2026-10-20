@@ -1,7 +1,7 @@
 
 ---
-"Tecnologia"
-2026-10-17
+titolo: "Tecnologia"
+data: 2026-10-17
 categoria: Idee
 ---
 
