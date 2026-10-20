@@ -1,10 +1,9 @@
 
 ---
-title: "Prova"
-date: 2026-10-17
-lang: it
+"Tecnologia"
+2026-10-17
 categoria: Idee
 ---
 
-Questo è il primo articolo. Non abbiamo ancora deciso cosa scrivere. È già qualcosa. Domani potremmo cambiare idea.
+Era l’estate del 1994. Consegnavamo gli elenchi del telefono porta a porta. Davanti a un garage aperto, accanto alla gabbia di un canarino, era seduto un omino col cappello. Gli dissi: «Signore, scusi, abbiamo portato l’elenco del telefono. Lo lascio a lei?». Mi rispose: «Il Signore l’è in chiesa. Io so’ Nello. L’elenco mettilo nel garage. C’accendo la stufa».
   
