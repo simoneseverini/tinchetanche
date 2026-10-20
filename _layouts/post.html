@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="{{ page.lang | default: 'it' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="{{ page.excerpt | strip_html | normalize_whitespace | truncate: 155 | escape }}">
+  <title>{{ page.title | escape }} — tinchetanche</title>
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+</head>
+<body>
+  <!-- Inutili Press: discreta nota editoriale, sempre visibile durante la lettura. -->
+  <aside class="imprint-note" aria-label="La casa editrice Inutili Press">
+    <a class="imprint-note__link" href="https://inutilipress.com/" rel="external">Inutili Press <span aria-hidden="true">↗</span></a>
+    <p>Una casa editrice che non esiste. I libri sì. Il primo è <em>Truthsick</em>.</p>
+  </aside>
+  <main class="page single-page">
+    <nav class="back"><a href="{{ '/' | relative_url }}">← Tutti gli scritti</a></nav>
+    <article class="entry single-entry">
+      <div class="meta">
+        <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%d.%m.%Y' }}</time>
+        {% if page.categoria %}<span class="meta-separator" aria-hidden="true">·</span><span>{{ page.categoria | escape }}</span>{% endif %}
+        {% if page.lang == 'en' %}<span class="meta-separator" aria-hidden="true">·</span><span>EN</span>{% endif %}
+      </div>
+      <h1>{{ page.title | escape }}</h1>
+      <div class="entry-content">{{ content }}</div>
+    </article>
+    <footer class="footer"><a href="{{ '/' | relative_url }}">← Torna all'inizio</a></footer>
+  </main>
+</body>
+</html>
