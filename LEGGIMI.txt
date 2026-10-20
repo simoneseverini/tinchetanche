@@ -1,37 +1,22 @@
-TINCHETANCHE — INDICE FISSO A SINISTRA
+TINCHETANCHE — INDICE MINIMALE
 
-File da aggiornare:
+Modifica richiesta: la colonna a sinistra ha ora la stessa posizione verticale,
+la stessa larghezza e lo stesso carattere del link Inutili Press a destra.
+Sono visibili soltanto i titoli degli scritti e le date: nessuna intestazione
+"Indice" e nessun numero.
+
+File da sostituire su GitHub:
   index.html
   style.css
   _layouts/post.html
 
-Il titolo del sito, i testi e il link Inutili Press restano invariati.
-La descrizione sotto Inutili Press NON viene reintrodotta.
+Non modificare la cartella _posts, _config.yml né CNAME.
+Non viene modificato il link Inutili Press o reintrodotta alcuna descrizione.
 
-Desktop: a sinistra un indice sempre visibile con titolo e data, ordinato dal più recente.
-L'indice punta a ciascun articolo della homepage, anche se inizialmente non è visibile
-per il caricamento progressivo. Su cellulare resta disponibile un piccolo comando «Indice».
+Su schermi piccoli la lista si apre tramite una piccola icona, senza scritta "Indice".
+L'elenco resta generato automaticamente dagli articoli Markdown.
 
-IMPORTANTE: questi file si basano sull'ultima versione preparata insieme, non su un download
-del sito attualmente in produzione. Se hai modificato manualmente index.html, style.css o
-post.html oltre a togliere il paragrafo Inutili Press, i tuoi cambiamenti verrebbero sovrascritti.
-In quel caso invia i file attuali e facciamo una fusione precisa.
-
-PER TOGLIERE I METADATI VISIBILI NEL TESTO DI «TECNOLOGIA»:
-Modifica il file .md in _posts (NON incluso in questo pacchetto). L'intestazione iniziale deve
-avere delimitatori --- su righe proprie, con le chiavi title/date e il layout post:
-
----
-layout: post
-title: "Tecnologia"
-date: 2026-10-17
-lang: it
-categoria: Idee
----
-
-Segue il testo originale dell'articolo, senza ripetere l'intestazione.
-
-Se vedi ancora i metadati come testo dopo aver salvato, inviami le prime 15 righe
-esatte del file .md per individuare il problema; la presenza delle chiavi italiane
-in sé non produce metadati visibili: il problema è il mancato riconoscimento del
-front matter o una duplicazione nel corpo del testo.
+IMPORTANTE: questa correzione è basata sull'ultimo ZIP condiviso in questa chat.
+Non ho potuto accedere ai file attualmente pubblicati su GitHub. Se hai fatto
+modifiche a index.html, style.css o _layouts/post.html da allora, verifica prima
+di sovrascrivere: possiamo integrare la modifica con i file aggiornati.

@@ -20,18 +20,17 @@ layout: null
   {% assign articoli = site.posts | sort: 'date' | reverse %}
   <nav class="site-index" aria-label="Indice degli scritti">
     <details class="site-index__details" open>
-      <summary>Indice</summary>
-      <p class="site-index__heading" aria-hidden="true">Indice</p>
-      <ol class="site-index__list">
+      <summary aria-label="Apri l’elenco degli scritti"><span aria-hidden="true">☰</span></summary>
+      <ul class="site-index__list">
         {% for post in articoli %}
           <li>
             <a href="#articolo-{{ post.slug }}" data-entry-link>
-              <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%d.%m.%Y' }}</time>
               <span>{{ post.title | escape }}</span>
+              <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%d.%m.%Y' }}</time>
             </a>
           </li>
         {% endfor %}
-      </ol>
+      </ul>
     </details>
   </nav>
   <main class="page">
