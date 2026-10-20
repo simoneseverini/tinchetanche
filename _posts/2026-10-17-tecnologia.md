@@ -1,7 +1,8 @@
-
 ---
-titolo: "Tecnologia"
-data: 2026-10-17
+layout: post
+title: "Tecnologia"
+date: 2026-10-17
+lang: it
 categoria: Idee
 ---
 
