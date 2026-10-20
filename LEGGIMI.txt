@@ -1,28 +1,37 @@
-TINCHETANCHE — LINK FISSO A INUTILI PRESS
+TINCHETANCHE — INDICE FISSO A SINISTRA
 
-Questa modifica fa apparire una piccola nota editoriale con link a https://inutilipress.com/.
-* Sul desktop e' fissa sul margine destro e non si muove quando si scorre.
-* Su telefono e tablet e' una sottile fascia fissa in basso, per non coprire gli articoli.
-* Funziona nella homepage e nelle pagine dei singoli articoli.
-* Non modifica gli articoli Markdown e non richiede modifiche a Cloudflare.
+File da aggiornare:
+  index.html
+  style.css
+  _layouts/post.html
 
-TESTO:
-Inutili Press
-Una casa editrice che non esiste. I libri si'. Il primo e' Truthsick.
+Il titolo del sito, i testi e il link Inutili Press restano invariati.
+La descrizione sotto Inutili Press NON viene reintrodotta.
 
-ISTRUZIONI PER GITHUB
-1. Vai su https://github.com/simoneseverini/tinchetanche
-2. SOSTITUISCI soltanto questi tre file, conservando le cartelle:
-   index.html
-   style.css
-   _layouts/post.html
-3. Per ciascuno apri il file nel repository, clicca sulla matita (Edit), sostituisci il contenuto con il file corrispondente e fai Commit changes.
-4. Attendi 1-3 minuti per la pubblicazione.
-5. Verifica la homepage e un articolo su desktop e cellulare.
+Desktop: a sinistra un indice sempre visibile con titolo e data, ordinato dal più recente.
+L'indice punta a ciascun articolo della homepage, anche se inizialmente non è visibile
+per il caricamento progressivo. Su cellulare resta disponibile un piccolo comando «Indice».
 
-ATTENZIONE: Questi file derivano dall'ultima versione che abbiamo preparato qui.
-Non e' stato possibile leggere il codice del sito online adesso. Se hai modificato index.html, style.css o post.html nel frattempo, NON sostituirli integralmente: applica soltanto la nuova sezione <aside class="imprint-note"> e le regole CSS corrispondenti. Posso fare io il merge se mi invii i tre file correnti.
+IMPORTANTE: questi file si basano sull'ultima versione preparata insieme, non su un download
+del sito attualmente in produzione. Se hai modificato manualmente index.html, style.css o
+post.html oltre a togliere il paragrafo Inutili Press, i tuoi cambiamenti verrebbero sovrascritti.
+In quel caso invia i file attuali e facciamo una fusione precisa.
 
-DESTINAZIONE DEL LINK
-Il link punta ora a https://inutilipress.com/.
-Se il dominio non ospita ancora una pagina, il collegamento potrebbe non funzionare fino a quando costruiremo e pubblicheremo Inutili Press. Volendo, puoi tenerlo senza pubblicare la modifica fino a quel momento.
+PER TOGLIERE I METADATI VISIBILI NEL TESTO DI «TECNOLOGIA»:
+Modifica il file .md in _posts (NON incluso in questo pacchetto). L'intestazione iniziale deve
+avere delimitatori --- su righe proprie, con le chiavi title/date e il layout post:
+
+---
+layout: post
+title: "Tecnologia"
+date: 2026-10-17
+lang: it
+categoria: Idee
+---
+
+Segue il testo originale dell'articolo, senza ripetere l'intestazione.
+
+Se vedi ancora i metadati come testo dopo aver salvato, inviami le prime 15 righe
+esatte del file .md per individuare il problema; la presenza delle chiavi italiane
+in sé non produce metadati visibili: il problema è il mancato riconoscimento del
+front matter o una duplicazione nel corpo del testo.

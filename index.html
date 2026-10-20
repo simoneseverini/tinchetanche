@@ -14,16 +14,32 @@ layout: null
 <body>
   <a class="skip-link" href="#scritti">Vai agli scritti</a>
   <!-- Inutili Press: discreta nota editoriale, sempre visibile durante la lettura. -->
-  <aside class="imprint-note" aria-label="Inutili Press">
+  <aside class="imprint-note" aria-label="La casa editrice Inutili Press">
     <a class="imprint-note__link" href="https://inutilipress.com/" rel="external">Inutili Press <span aria-hidden="true">↗</span></a>
   </aside>
+  {% assign articoli = site.posts | sort: 'date' | reverse %}
+  <nav class="site-index" aria-label="Indice degli scritti">
+    <details class="site-index__details" open>
+      <summary>Indice</summary>
+      <p class="site-index__heading" aria-hidden="true">Indice</p>
+      <ol class="site-index__list">
+        {% for post in articoli %}
+          <li>
+            <a href="#articolo-{{ post.slug }}" data-entry-link>
+              <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%d.%m.%Y' }}</time>
+              <span>{{ post.title | escape }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+    </details>
+  </nav>
   <main class="page">
     <header class="masthead">
       <h1>Noi si scrive. E si pensa. A volte tutt'e due. Ma non sempre.</h1>
     </header>
 
     <section id="scritti" aria-label="Storie, opinioni e idee" class="feed">
-      {% assign articoli = site.posts | sort: 'date' | reverse %}
       {% for post in articoli %}
         <article class="entry" lang="{{ post.lang | default: 'it' }}" id="articolo-{{ post.slug }}">
           <div class="meta">
@@ -47,35 +63,61 @@ layout: null
   </main>
 
   <script>
-    // Gli articoli sono ordinati per data da GitHub Pages.
-    // Ne mostriamo quattro alla volta, poi altri quattro scorrendo.
+    // Progressive reveal. Archive links also work for not-yet-visible articles.
     (function () {
       const articles = [...document.querySelectorAll('.entry')];
       const trigger = document.getElementById('load-trigger');
+      const indexMenu = document.querySelector('.site-index__details');
       const batchSize = 4;
-      let visible = Math.min(batchSize, articles.length);
-
-      if (!('IntersectionObserver' in window) || articles.length <= batchSize) {
-        trigger.hidden = true;
-        return;
+      let visible = articles.length;
+      let observer;
+      const narrowScreen = window.matchMedia('(max-width: 1249px)');
+      function updateIndexMode() {
+        if (indexMenu) indexMenu.open = !narrowScreen.matches;
       }
+      updateIndexMode();
+      if (narrowScreen.addEventListener) narrowScreen.addEventListener('change', updateIndexMode);
+      else if (narrowScreen.addListener) narrowScreen.addListener(updateIndexMode);
 
-      articles.forEach((article, index) => {
-        if (index >= visible) article.hidden = true;
-      });
-
-      const observer = new IntersectionObserver((entries) => {
-        if (!entries.some(entry => entry.isIntersecting)) return;
-        const next = Math.min(visible + batchSize, articles.length);
+      function showThrough(index) {
+        const next = Math.min(articles.length, Math.max(visible, index + 1));
         for (let i = visible; i < next; i++) articles[i].hidden = false;
         visible = next;
         if (visible === articles.length) {
-          observer.disconnect();
+          if (observer) observer.disconnect();
           trigger.hidden = true;
         }
-      }, { rootMargin: '600px 0px' });
+      }
+      function goToHash() {
+        if (!location.hash) return;
+        const id = decodeURIComponent(location.hash.slice(1));
+        const i = articles.findIndex(article => article.id === id);
+        if (i === -1) return;
+        showThrough(i);
+        requestAnimationFrame(() => articles[i].scrollIntoView({ block: 'start' }));
+      }
 
-      observer.observe(trigger);
+      if ('IntersectionObserver' in window && articles.length > batchSize) {
+        visible = batchSize;
+        articles.forEach((article, i) => { if (i >= visible) article.hidden = true; });
+        observer = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) showThrough(visible + batchSize - 1);
+        }, { rootMargin: '600px 0px' });
+        observer.observe(trigger);
+      } else {
+        trigger.hidden = true;
+      }
+
+      document.querySelectorAll('[data-entry-link]').forEach(link => {
+        link.addEventListener('click', () => {
+          const id = decodeURIComponent(link.hash.slice(1));
+          const i = articles.findIndex(article => article.id === id);
+          if (i >= 0) showThrough(i);
+          if (indexMenu && narrowScreen.matches) indexMenu.open = false;
+        });
+      });
+      window.addEventListener('hashchange', goToHash);
+      if (location.hash) goToHash();
     })();
   </script>
 </body>
