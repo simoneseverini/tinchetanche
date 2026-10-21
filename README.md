@@ -44,7 +44,3 @@ Gli articoli sono ordinati dal più recente al più vecchio. La pagina ne mostra
 - `_layouts/post.html`: pagina dedicata a ogni singolo articolo.
 - `_posts/`: un file Markdown per ogni testo.
 - `CNAME`: collegamento al dominio personalizzato.
-
-## Nota importante
-
-L'archivio **non è stato caricato automaticamente su GitHub**. Il sito esistente resterà com'è fino a quando non eseguirai il commit. Se le impostazioni GitHub Pages usano un'azione personalizzata che pubblica file HTML statici senza eseguire Jekyll, sarà necessario configurare una build Jekyll (o passare a «Deploy from a branch»).
