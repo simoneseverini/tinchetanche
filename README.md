@@ -1,4 +1,4 @@
-# tinchetanche — versione minimale
+# tinchetanche
 
 Un sito di lettura essenziale, in italiano e in inglese, per GitHub Pages.
 Niente database, piattaforme esterne o abbonamenti.
