@@ -1,9 +1,0 @@
-title: Inutili Press
-url: "https://inutilipress.com"
-baseurl: ""
-markdown: kramdown
-collections:
-  books:
-    output: false
-exclude:
-  - LEGGIMI.md
