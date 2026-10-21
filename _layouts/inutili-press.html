@@ -1,0 +1,81 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="{{ page.lang | default: 'en' | escape }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{% if page.inutili_book %}{{ page.title | escape }} — {% endif %}Inutili Press</title>
+  <link rel="stylesheet" href="/inutilipress/style.css">
+</head>
+<body class="ip-page">
+  <a class="ip-skip" href="#books">Skip to books</a>
+  <nav class="ip-back" aria-label="Tinchetanche">
+    <a href="/">Tinchetanche <span aria-hidden="true">↗</span></a>
+  </nav>
+
+  <main class="ip-main">
+    <header class="ip-masthead">
+      <h1>{% if page.inutili_book %}<a href="/inutilipress/">Inutili Press</a>{% else %}Inutili Press{% endif %}</h1>
+    </header>
+
+    {% comment %}
+      Ordinary Markdown pages, not a custom collection: no _config.yml changes.
+      The same layout renders the catalogue and each book's own page.
+      Higher order numbers appear first. All books use the same markup below.
+    {% endcomment %}
+    {% if page.inutili_book %}
+      {% assign books = site.pages | where: 'url', page.url %}
+    {% else %}
+      {% assign books = site.pages | where: 'inutili_book', true | sort: 'order' | reverse %}
+    {% endif %}
+
+    <section class="ip-books" id="books" aria-label="Books">
+      {% for book in books %}
+        {% assign book_id = book.url | slugify %}
+        {% assign book_text = book.content | strip %}
+        <article class="ip-book" id="{{ book_id }}" lang="{{ book.lang | default: 'en' | escape }}" aria-labelledby="{{ book_id }}-title">
+          <h2 class="ip-sr-only" id="{{ book_id }}-title">{{ book.title | escape }}{% if book.author %} — {{ book.author | escape }}{% endif %}</h2>
+
+          <div class="ip-book-cover">
+            {% if book.amazon_url and book.amazon_url != '' %}<a class="ip-cover-link" href="{{ book.amazon_url | escape }}" aria-label="{{ book.title | escape }} on Amazon.com">{% endif %}
+              {% if book.cover and book.cover != '' %}
+                <img class="ip-cover" src="{{ book.cover | escape }}" alt="{{ book.title | escape }}{% if book.author %}, {{ book.author | escape }}{% endif %}" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+                <span class="ip-cover-fallback" hidden>{{ book.title | escape }}{% if book.author %}<small>{{ book.author | escape }}</small>{% endif %}</span>
+              {% else %}
+                <span class="ip-cover-fallback">{{ book.title | escape }}{% if book.author %}<small>{{ book.author | escape }}</small>{% endif %}</span>
+              {% endif %}
+            {% if book.amazon_url and book.amazon_url != '' %}</a>{% endif %}
+
+            {% if book.amazon_url and book.amazon_url != '' %}
+              <p class="ip-purchase"><a href="{{ book.amazon_url | escape }}">{% if book.lang == 'it' %}Acquista su Amazon{% else %}Buy on Amazon{% endif %} <span aria-hidden="true">↗</span></a></p>
+            {% endif %}
+          </div>
+
+          {% if book_text != '' %}
+            <div class="ip-book-text">{{ book.content | markdownify }}</div>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </section>
+  </main>
+
+  <script>
+    // Keep the title and purchase link usable if an external cover cannot load.
+    // Book discovery and Markdown rendering do not depend on JavaScript.
+    document.querySelectorAll('.ip-cover').forEach(function (image) {
+      function showTextFallback() {
+        var fallback = image.nextElementSibling;
+        if (fallback && fallback.classList.contains('ip-cover-fallback')) {
+          image.hidden = true;
+          fallback.hidden = false;
+        }
+      }
+      image.addEventListener('error', showTextFallback);
+      if (image.complete && image.naturalWidth === 0) showTextFallback();
+    });
+  </script>
+</body>
+</html>
