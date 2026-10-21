@@ -3,17 +3,9 @@
 Un sito di lettura essenziale, in italiano e in inglese, per GitHub Pages.
 Niente database, piattaforme esterne o abbonamenti.
 
-## Installazione
-
-1. Scarica e **decomprimi** `tinchetanche_sito_minimale.zip`.
-2. Nel repository https://github.com/simoneseverini/tinchetanche, mantieni i file `LICENSE` già presenti.
-3. Carica nella **radice del repository** i file `index.html`, `style.css`, `_config.yml`, `CNAME` e la cartella `_layouts`, sostituendo `index.html` esistente. Carica anche la cartella `_posts` quando contiene il primo articolo.
-4. Fai il commit dei cambiamenti. Se GitHub Pages usa **Deploy from a branch**, GitHub elaborerà automaticamente le pagine con Jekyll (configurazione ordinaria); non serve installare nulla.
-5. Non modificare i record DNS di Cloudflare o il dominio GitHub: il file `CNAME` mantiene `tinchetanche.org`.
-
 ## Come pubblicare un nuovo articolo
 
-Su GitHub, scegli **Add file → Create new file** e chiama il file, per esempio:
+Scegli **Add file → Create new file** e chiama il file, per esempio:
 
 `_posts/2026-10-17-il-primo-articolo.md`
 
