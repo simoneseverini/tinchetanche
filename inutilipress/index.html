@@ -1,0 +1,48 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Inutili Press — books.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Inutili Press">
+  <meta property="og:description" content="Books from Inutili Press.">
+  <title>Inutili Press</title>
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body>
+  <a class="skip-link" href="#books">Skip to books</a>
+  <main class="page">
+    <header class="masthead">
+      <h1>Inutili Press</h1>
+    </header>
+
+    <section id="books" class="books" aria-label="Books">
+      {% assign catalogo = site.books | sort: 'order' | reverse %}
+      {% for book in catalogo %}
+      <article class="book" lang="{{ book.lang | default: 'en' }}">
+        {% if book.cover %}
+        <div class="book-cover">
+          {% if book.amazon_url %}<a href="{{ book.amazon_url | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ book.title | escape }} on Amazon">{% endif %}
+            <img src="{{ book.cover | escape }}" alt="Cover of {{ book.title | escape }}" width="338" height="522" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+          {% if book.amazon_url %}</a>{% endif %}
+        </div>
+        {% endif %}
+        <div class="book-information">
+          <h2>{{ book.title | escape }}</h2>
+          {% if book.author %}<p class="author">{{ book.author | escape }}</p>{% endif %}
+          {% if book.content != '' %}<div class="description">{{ book.content | markdownify }}</div>{% endif %}
+          {% if book.amazon_url %}
+            <p class="purchase"><a href="{{ book.amazon_url | escape }}" target="_blank" rel="noopener noreferrer">Buy on Amazon <span aria-hidden="true">↗</span></a></p>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
