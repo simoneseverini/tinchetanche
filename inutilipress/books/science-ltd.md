@@ -10,4 +10,4 @@ amazon_url: "https://www.amazon.com/dp/1041131062"
 ---
 **Science Ltd, by Andrea Borghini and Simone Severini**
 
-*Science Ltd* is a field guide to research enterprise in the age of machines, written by two metascientific entrepreneurs, on the uneasy balance between profit and truth, individual ambition and collective values, and human creativity and machine intelligence.
+"We started writing this book in the summer of 2022 in Fiascherino, near Lerici, in Liguria. We interviewed practitioners, academics and creative minds, and set out to assemble a field guide to the research enterprise in the age of machines, one that explores the uneasy balance between profit and truth, and between individual ambition and collective values. The book acknowledges the undisputed influence of science on contemporary society while questioning the sustainability of current research paradigms."
