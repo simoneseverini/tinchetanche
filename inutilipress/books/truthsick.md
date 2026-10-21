@@ -10,4 +10,4 @@ amazon_url: "https://www.amazon.com/dp/B0HLBGSLFG"
 ---
 Truthsick, by Simone Severini
 
-Truthsick is a comedy about mathematics, the self-deluded stories we tell ourselves, and the vast distance between understanding the world and knowing how to live in it.
+*Truthsick* is a comedy about mathematics, the self-deluded stories we tell ourselves, and the vast distance between understanding the world and knowing how to live in it.
