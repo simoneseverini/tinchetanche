@@ -14,9 +14,20 @@ layout: null
 <body>
   <a class="skip-link" href="#scritti">Vai agli scritti</a>
   <!-- Inutili Press: discreta nota editoriale, sempre visibile durante la lettura. -->
-  <aside class="imprint-note" aria-label="La casa editrice Inutili Press">
-    <a class="imprint-note__link" href="/inutilipress/" rel="external">Inutili Press <span aria-hidden="true">↗</span></a>
-  </aside>
+  <aside class="imprint-note" aria-label="Collegamenti">
+  <div>
+    <a class="imprint-note__link" href="/inutilipress/">
+      Inutili Press <span aria-hidden="true">↗</span>
+    </a>
+
+    <a class="imprint-note__link"
+       href="https://belriguardo.art/"
+       rel="external"
+       style="display: block; margin-top: 8px;">
+      Belriguardo Project <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</aside>
   {% assign articoli = site.posts | sort: 'date' | reverse %}
   <nav class="site-index" aria-label="Indice degli scritti">
     <details class="site-index__details" open>
